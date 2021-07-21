@@ -21,8 +21,8 @@ app.use('/v1/search',searchRoute)
 
 
 // errors handler
-app.use((err, req, res) => {
- res.status(500).json({err:err.message})
+app.use((err, req, res,next) => {
+ res.json({err:err.message})
 });
 const port =process.env.PORT || 4000
 app.listen(port,()=>{

@@ -11,22 +11,38 @@ const urlString = `DRIVER={DB2};DATABASE=${config.database};HOSTNAME=${config.ho
 
 const DB2 = new Promise((res, ej) => {
   ibmdb.open(urlString, function (err, conn) {
-    if (err) return console.log(err);
+    if (err) throw err;
 
     res(conn);
   });
 });
 
-const sample = async () => {
-  const db = await DB2;
-  const pm = new Promise((res, ej) => {
-    db.query("select * from products limit 5;", function (err, data) {
-      if (err) throw err;
 
-      res(data);
-    });
-  });
-  return await pm;
-};
 
-module.exports = { sample };
+
+
+// const insert=async()=>{
+//   const rows=await getData()
+//   const db=await DB2
+//   // "name","img","des","feature__ORIGIN","feature__MATERIALS","feature__END_OF_LIFE","specifications__PRODUCT_CARE","specifications__ADDITIONAL_FEATURES","specifications__RETURNS","company"
+//   for(let i=0;i<rows.length;i++){
+//     const data=rows[i]
+//     const query={
+//       sql:`insert into product (NAME,"img","des","feature__ORIGIN","feature__MATERIALS","feature__END_OF_LIFE","specifications__PRODUCT_CARE","specifications__ADDITIONAL_FEATURES","specifications__RETURNS","company",category) values(?,?,?,?,?,?,?,?,?,?,?);`,
+//       params:Object.entries(data).map(e=>e[1])
+    
+//     }
+//     db.query(query.sql,[...query.params],(err,data)=>{
+//       if(err) return console.log(i,'false',err.message);
+       
+//       return console.log(i,'ok');
+
+//     })
+//   }
+
+
+
+// }
+// insert()
+
+module.exports = { DB2 };
