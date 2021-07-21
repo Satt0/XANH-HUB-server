@@ -18,7 +18,7 @@ app.use(express.json())
 app.use('/v1/user',userRoute)
 app.use('/v1/product',productRoute)
 app.use('/v1/search',searchRoute)
-app.get('/',(res,res)=>{
+app.get('/',(req,res)=>{
     res.send('xanhub server!')
 })
 
