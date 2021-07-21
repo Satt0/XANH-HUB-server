@@ -1,9 +1,17 @@
-const route=require('express').Router({mergeParams:true})
+const route = require("express").Router({ mergeParams: true });
+const { logInUser } = require("../database/queries/user");
+const { signToken } = require("../authen");
+route.post("/login", async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const user = await logInUser({ username, password });
+    if(!user.err){
+        return res.json({ user, jwt: signToken({ user }) });
+    }
+    throw new Error(user.err)
+  } catch (e) {
+    next(e);
+  }
+});
 
-
-
-
-
-
-
-module.exports=route
+module.exports = route;

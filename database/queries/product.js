@@ -1,9 +1,12 @@
 const {DB2} = require('../index')
+var cache = require('memory-cache');
+
 
 
 
 exports.getProductById=async({productId})=>{
     try{
+        
         const db=await DB2
         const wait=new Promise((res,ej)=>{
             // limit 30
@@ -23,12 +26,18 @@ exports.getProductById=async({productId})=>{
 
 exports.getAllProducts=async()=>{
     try{
+
+        const fromCache=cache.get('all-product')
+        if(fromCache){
+            return fromCache
+        }
+
         const db=await DB2
         const wait=new Promise((res,ej)=>{
             // limit 30
-            db.query('select * from product limit 30;',(err,data)=>{
+            db.query('select * from product;',(err,data)=>{
            if(err) throw err
-
+            cache.put('all-product',data)        
            res(data)
             
         })
