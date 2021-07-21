@@ -17,7 +17,15 @@ const DB2 = new Promise((res, ej) => {
   });
 });
 
-
+setInterval(()=>{
+  DB2 = new Promise((res, ej) => {
+    ibmdb.open(urlString, function (err, conn) {
+      if (err) throw err;
+  
+      res(conn);
+    });
+  });
+},1000 * 60 * 5)
 
 
 
