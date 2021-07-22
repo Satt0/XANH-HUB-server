@@ -8,10 +8,24 @@ exports.signToken=({user})=>{
     return token
 
 }
-exports.verifyToken=({token})=>{
-    var decoded = jwt.verify(token, key);
-    if(decoded.username){
-        return true
+
+
+// middlewares
+
+
+exports.isAuth=(req,res,next)=>{
+    try{
+        const token=req.get('Authorization').substring('Bearer '.length).trim()
+        
+        const decoded=jwt.verify(token,key)
+        if(!decoded.err){
+            req.user=decoded
+           return next()
+        }
+        return res.status(404).json({err:'invalid',signOut:true})
+        
     }
-    return false
+    catch(e){
+        next(e)
+    }
 }

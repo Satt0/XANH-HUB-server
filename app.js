@@ -8,7 +8,7 @@ const app=express()
 const userRoute=require('./routes/user')
 const productRoute=require('./routes/product')
 const searchRoute=require('./routes/search')
-
+const shopRoute=require('./routes/shop')
 
 app.use(cors())
 app.use(logger('dev'))
@@ -18,6 +18,7 @@ app.use(express.json())
 app.use('/v1/user',userRoute)
 app.use('/v1/product',productRoute)
 app.use('/v1/search',searchRoute)
+app.use('/v1/shop',shopRoute)
 app.get('/',(req,res)=>{
     res.send('xanhub server!')
 })

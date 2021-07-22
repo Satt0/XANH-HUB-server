@@ -9,7 +9,7 @@ var ibmdb = require("ibm_db");
 
 const urlString = `DRIVER={DB2};DATABASE=${config.database};HOSTNAME=${config.host};UID=${config.username};PWD=${config.password};PORT=${config.port};PROTOCOL=TCPIP;`;
 
-const DB2 = new Promise((res, ej) => {
+let DB2 = new Promise((res, ej) => {
   ibmdb.open(urlString, function (err, conn) {
     if (err) throw err;
 
@@ -18,10 +18,11 @@ const DB2 = new Promise((res, ej) => {
 });
 
 setInterval(()=>{
+  console.log('reconnecting db');
   DB2 = new Promise((res, ej) => {
     ibmdb.open(urlString, function (err, conn) {
       if (err) throw err;
-  
+      console.log('reconnect ok');
       res(conn);
     });
   });
