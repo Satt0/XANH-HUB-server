@@ -6,18 +6,27 @@ var cache = require('memory-cache');
 
 exports.getProductById=async({productId})=>{
     try{
-        
+        const fromCache=cache.get(`cache/product-${productId}`)
+        if(fromCache){
+            return fromCache
+        }
         const db=await DB2
         const wait=new Promise((res,ej)=>{
             // limit 30
             db.query('select * from product where SID=?;',[productId],(err,data)=>{
            if(err) ej(err)
 
+          
            res(data[0] || {err:'not found'})
             
         })
         }) 
-        return await wait
+        const data=await wait
+
+        if(!data.err){
+            cache.put(`cache/product-${productId}`,data)    
+        }
+        return data
            
     }catch(e){
         throw e
