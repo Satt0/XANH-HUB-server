@@ -6,3 +6,11 @@
 
 
 /v1/user/login - POST - body :{username,password}
+
+
+/v1/shop/checkout - POST
+- body:{cart:[{...}],order_infor:{ship,payment,address,discount}}
+- headers : {
+    "Authorization":"Bearer <token>"
+}
+/v1/shop/order?filter=<queue || success || canceled> - GET
