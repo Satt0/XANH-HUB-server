@@ -1,6 +1,6 @@
 const {
-    getAllProducts,
     getProductById,
+    searchProducts
   } = require("../database/queries/product");
   
 
@@ -17,4 +17,12 @@ exports.getProductById=async(req,res,next)=>{
           next(e);
         }
       
+}
+exports.searchByKeyword=async(req,res,next)=>{
+  try{
+    const {keyword,category=null}=req.query
+      res.json(await searchProducts({keyword,category}))
+  }catch(e){
+    next(e)
+  }
 }
