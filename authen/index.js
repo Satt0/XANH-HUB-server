@@ -22,10 +22,11 @@ exports.isAuth=(req,res,next)=>{
             req.user=decoded
            return next()
         }
-        return res.status(404).json({err:'invalid',signOut:true})
+        throw new Error('invalid')
         
     }
     catch(e){
-        next(e)
+        return res.status(404).json({err:'invalid',signOut:true})
+
     }
 }

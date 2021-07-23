@@ -19,7 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "memory-cache": "^0.2.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "validator": "^13.6.0"
   },
   "description": ""
 }
