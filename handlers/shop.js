@@ -1,5 +1,5 @@
 
-const {createCheckout,getOrderByFilter} =require('../database/queries/shop')
+const {createCheckout,getOrderByFilter,receivedProduct} =require('../database/queries/shop')
 exports.postCheckout=async(req,res,next)=>{
     try{
         const {cart,order_infor}=req.body
@@ -13,6 +13,16 @@ exports.getByFilter=async(req,res,next)=>{
             const {filter}=req.query;
             const {USER_ID}=req.user;
             res.json(await getOrderByFilter({filter,USER_ID}))
+    }catch(e){
+        next(e)
+    }
+}
+exports.receiveHandler=async(req,res,next)=>{
+    try{
+            const {USER_ID}=req.user;
+            const {SID}=req.body
+            
+            return res.json(await receivedProduct({USER_ID,SID}))
     }catch(e){
         next(e)
     }

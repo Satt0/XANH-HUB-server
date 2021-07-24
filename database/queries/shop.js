@@ -32,7 +32,22 @@ exports.getOrderByFilter=async({filter,USER_ID})=>{
 }
 
 
+exports.receivedProduct=async({USER_ID,SID})=>{
+  try{
+    const db=await DB2
+    const process=new Promise((resolve,reject)=>{
+      db.query(`update  ORDER_ITEM set status='success' where USER_ID=? and SID=?`,[USER_ID,SID],(err,data)=>{
+        if(err) return resolve(false)
 
+
+        return resolve(true)
+      })
+    })
+    return  {status:await process}
+  }catch(e){
+    throw e
+  }
+}
 
 
 
