@@ -49,7 +49,40 @@ exports.receivedProduct=async({USER_ID,SID})=>{
   }
 }
 
+exports.rateProduct=async({USER_ID,SID,RATE})=>{
+  try{
+    const db=await DB2
+    const process=new Promise((resolve,reject)=>{
+      db.query("insert into RATING(USERID,PRODUCTID,RATING) values(?,?,?)",[USER_ID,SID,RATE],(err,data)=>{
+        if(err) return resolve(false)
 
+
+        return resolve(true)
+      })
+    })
+    return  {status:await process}
+  }catch(e){
+    throw e
+  }
+}
+exports.checkDidRate=async({USER_ID,SID})=>{
+
+  try{
+    const db=await DB2
+    console.log(USER_ID,SID);
+    const process=new Promise((resolve,reject)=>{
+      db.query("select * from rating where USERID=? and PRODUCTID=?;",[USER_ID,SID],(err,data)=>{
+        if(err) return resolve(false)
+
+        console.log(data);
+        return resolve(data.length>0)
+      })
+    })
+    return  {status:await process}
+  }catch(e){
+    throw e
+  }
+}
 
 
 
