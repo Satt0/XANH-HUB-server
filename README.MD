@@ -20,3 +20,9 @@
 }
  
 /v1/shop/order?filter=<queue || success || canceled> - GET
+
+
+/v1/recommend/product?TYPE=?&LIMIT=?&PRODUCT_ID=?&USER_ID=? - GET
+
+TYPE=CS ---> require USER_ID,LIMIT
+TYPE=CF ---> require PRODUCT_ID
