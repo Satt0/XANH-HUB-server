@@ -1,5 +1,5 @@
 const route = require("express").Router({ mergeParams: true });
-const { logInUser } = require("../database/queries/user");
+const { logInUser,signUpUser } = require("../database/queries/user");
 const { signToken } = require("../authen");
 route.post("/login", async (req, res, next) => {
   try {
@@ -13,5 +13,12 @@ route.post("/login", async (req, res, next) => {
     next(e);
   }
 });
-
+route.post('/signup',async(req,res,next)=>{
+  try{
+        const {username,password,email}=req.body
+        return res.json(await signUpUser({username,password,email}))
+  }catch(e){
+    next(e)
+  }
+})
 module.exports = route;
