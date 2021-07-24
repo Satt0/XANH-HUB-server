@@ -17,7 +17,7 @@ exports.getOrderByFilter=async({filter,USER_ID})=>{
   try{
       const db=await DB2
       const process=new Promise((resolve,reject)=>{
-        db.query("select * from ORDER_ITEM WHERE USER_ID=? and STATUS=?;",[USER_ID,filter],(err,data)=>{
+        db.query("select * from ORDER_ITEM WHERE USER_ID=? and STATUS=? order by SID desc;",[USER_ID,filter],(err,data)=>{
           if(err) return reject({err:'server error!'})
 
 

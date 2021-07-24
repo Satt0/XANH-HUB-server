@@ -30,28 +30,4 @@ setInterval(()=>{
 
 
 
-// const insert=async()=>{
-//   const rows=await getData()
-//   const db=await DB2
-//   // "name","img","des","feature__ORIGIN","feature__MATERIALS","feature__END_OF_LIFE","specifications__PRODUCT_CARE","specifications__ADDITIONAL_FEATURES","specifications__RETURNS","company"
-//   for(let i=0;i<rows.length;i++){
-//     const data=rows[i]
-//     const query={
-//       sql:`insert into product (NAME,"img","des","feature__ORIGIN","feature__MATERIALS","feature__END_OF_LIFE","specifications__PRODUCT_CARE","specifications__ADDITIONAL_FEATURES","specifications__RETURNS","company",category) values(?,?,?,?,?,?,?,?,?,?,?);`,
-//       params:Object.entries(data).map(e=>e[1])
-    
-//     }
-//     db.query(query.sql,[...query.params],(err,data)=>{
-//       if(err) return console.log(i,'false',err.message);
-       
-//       return console.log(i,'ok');
-
-//     })
-//   }
-
-
-
-// }
-// insert()
-
 module.exports = { DB2 };
