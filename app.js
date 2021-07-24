@@ -19,8 +19,10 @@ app.use('/v1/user',userRoute)
 app.use('/v1/product',productRoute)
 app.use('/v1/search',searchRoute)
 app.use('/v1/shop',shopRoute)
-app.get('/',(req,res)=>{
-    res.send('xanhub server!')
+
+app.use(express.static(__dirname+'/client'))
+app.use('*',(req,res)=>{
+    res.sendFile(__dirname+'/client/index.html')
 })
 
 // errors handler
