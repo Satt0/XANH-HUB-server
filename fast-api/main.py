@@ -26,7 +26,7 @@ rs1.fit()
 
 # CF
 
-ratings = pd.read_csv('data.csv')
+ratings = pd.read_csv('./data.csv')
 Y_data = ratings.to_numpy()
 
 rs2 = CF(Y_data, k = 2)
