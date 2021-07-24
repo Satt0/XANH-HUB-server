@@ -16,7 +16,11 @@ route.post("/login", async (req, res, next) => {
 route.post('/signup',async(req,res,next)=>{
   try{
         const {username,password,email}=req.body
-        return res.json(await signUpUser({username,password,email}))
+        const user=(await signUpUser({username,password,email}))
+        if(!user.err){
+          return res.json({ user, jwt: signToken({ user }) });
+      }
+      
   }catch(e){
     next(e)
   }
