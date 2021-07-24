@@ -9,6 +9,7 @@ const userRoute=require('./routes/user')
 const productRoute=require('./routes/product')
 const searchRoute=require('./routes/search')
 const shopRoute=require('./routes/shop')
+const recommendRoute=require('./routes/recommend')
 
 app.use(cors())
 app.use(logger('dev'))
@@ -19,7 +20,7 @@ app.use('/v1/user',userRoute)
 app.use('/v1/product',productRoute)
 app.use('/v1/search',searchRoute)
 app.use('/v1/shop',shopRoute)
-
+app.use('/v1/recommend',recommendRoute)
 app.use(express.static(__dirname+'/client'))
 app.use('*',(req,res)=>{
     res.sendFile(__dirname+'/client/index.html')
